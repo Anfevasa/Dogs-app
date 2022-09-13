@@ -4,6 +4,12 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("dog", {
+    ID: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      primaryKey: true,
+    },
     nombre: {
       type: DataTypes.STRING,
       allowNull: false,
