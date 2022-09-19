@@ -1,6 +1,7 @@
 const { Router } = require("express");
 // Importar todos los routers;
 const router = Router();
+const {postDog} = require("./Controllers/postControllers")
 const {
   prueba,
   getDogByID,
@@ -19,6 +20,6 @@ router.get("/dogs", getAllDogs);
 router.get("/temperaments", prueba);
 
 // POST
-router.post("/dogs", prueba);
+router.post("/dogs", postDog);
 
 module.exports = router;

@@ -39,11 +39,11 @@ const getAllDogs = async (req, res) => {
   // Traigo datos de DB
   try {
     dbData = await Dog.findAll();
-    //res.send(dbData);
+    //res.json(dbData);
     if (name) {
-      dbData = dbData.filter((dog) => dog.name.includes(name));
+      dbData = dbData.filter((dog) => dog.nombre.includes(name));
     }
-  } catch (error) {
+  } catch (e) {
     res.status(400).json({ DB_err: e.message });
   }
 
