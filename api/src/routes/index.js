@@ -18,4 +18,7 @@ router.get("/dogs", getAllDogs);
 
 router.get("/temperaments", prueba);
 
+// POST
+router.post("/dogs", prueba);
+
 module.exports = router;
