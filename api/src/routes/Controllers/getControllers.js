@@ -51,8 +51,6 @@ const getAllDogs = async (req, res) => {
   allDogs.length
     ? res.json(allDogs)
     : res.status(404).json({ error: "Dog not found" });
-  /* if(!allDogs.length)
-  res.json(allDogs);*/
 };
 
 const getDogByID = async (req, res) => {
@@ -103,11 +101,19 @@ const getDogByID = async (req, res) => {
   //res.send(`apikey ${API_KEY}`)*/
 };
 
-const getTemperByID = (req, res) => {};
+const getTemperaments = async (req, res) => {
+  let dbData;
+  try {
+    dbData = await Temper.findAll();
+    res.json(dbData);
+  } catch (e) {
+    res.status(400).json({ DB_err: e.message });
+  }
+};
 
 module.exports = {
   prueba,
   getDogByID,
   getAllDogs,
-  getTemperByID,
+  getTemperaments,
 };

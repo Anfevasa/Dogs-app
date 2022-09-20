@@ -6,6 +6,7 @@ const {
   prueba,
   getDogByID,
   getAllDogs,
+  getTemperaments,
 } = require("./Controllers/getControllers");
 
 // Configurar los routers
@@ -17,7 +18,7 @@ router.use("/prueba", prueba);
 router.get("/dogs/:id", getDogByID);
 router.get("/dogs", getAllDogs);
 
-router.get("/temperaments", prueba);
+router.get("/temperaments", getTemperaments);
 
 // POST
 router.post("/dogs", postDog);
