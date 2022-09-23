@@ -20,8 +20,8 @@ export default function AllCards() {
       {dogsState.length ? (
         dogsState.map((dog) => (
           <div key={dog.ID}>
-            <Link to = "https://www.google.com/?hl=es">
-              <Card name={dog.nombre} />
+            <Link to = {`/${dog.ID}`}>
+              <Card props={dog} />
             </Link>
           </div>
         ))
