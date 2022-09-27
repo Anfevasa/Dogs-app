@@ -5,14 +5,16 @@ import { getAllTempers } from "../redux/Actions";
 import { errorObj, validator } from "../Validators/Validators";
 
 export default function CreateDog() {
+  // Genero los estados necesarios y traigo los tempers de la store
   const [newDog, setNewDog] = useState({
-    img: ""
+    img: "",
   });
-
-  let dogsTempers = useSelector((state) => state.tempers);
   const [newDogTempers, setNewDogTempers] = useState([]);
   const [validDog, setValidDog] = useState(true);
 
+  let dogsTempers = useSelector((state) => state.tempers);
+
+  // Gestiono cambios en el formulario
   function handleChange(e) {
     e.preventDefault();
     validator(e);
@@ -31,6 +33,7 @@ export default function CreateDog() {
     } else setValidDog(true);
   }
 
+  // Gestiono cambios de tempers en el select
   function handleTempers(e) {
     e.preventDefault();
     setNewDogTempers([...newDogTempers, Number(e.target.value)]);
@@ -47,6 +50,7 @@ export default function CreateDog() {
     } else setValidDog(true);
   }
 
+  // Formateo el nuevo dog para enviar al back
   function formatDog() {
     return {
       nombre: newDog.nombre,
@@ -58,18 +62,24 @@ export default function CreateDog() {
     };
   }
 
+  // Envío acción al back
   const dispatch = useDispatch();
   function handleSubmit(e) {
     e.preventDefault();
     //console.log(formatDog())
     try {
       dispatch(actions.postDog(formatDog()));
+      setNewDog({
+        img: "",
+      });
+      setNewDogTempers([]);
       alert("perrito creado :D");
     } catch (error) {
       console.log(error.message);
     }
   }
 
+  // Traigo tempers al montar el componente
   useEffect(() => {
     async function getTempers() {
       await dispatch(getAllTempers());
