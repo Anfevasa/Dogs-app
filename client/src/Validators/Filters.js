@@ -2,9 +2,11 @@ export function dataFiltered(array, filters) {
   
   let data = array;
   let pages = {};
-  //console.log("empezando paginado y filtros",data)
 
-  // filtros 
+  // ------------------------------- nombre --------------------------------------
+  if(filters.nombre) data = data.filter(e=> (e.nombre.toLowerCase().includes(filters.nombre.toLowerCase())))
+
+  // ------------------------------- filtros ------------------------------------- 
   // origen
   if(filters.filters[0]==="Existentes") data = data.filter(e=>!(isNaN(e.ID)))
   else if(filters.filters[0]==="Creados") data = data.filter(e=>(isNaN(e.ID)))
@@ -16,6 +18,8 @@ export function dataFiltered(array, filters) {
       data = data.filter(dog => (dog.tempers?dog.tempers.includes(temper.nombre):false))
     });
   }
+
+  // ------------------------------ orden ----------------------------------------
 
   // ordeno por orden alfabético
   if (filters.order === "A-Z") {

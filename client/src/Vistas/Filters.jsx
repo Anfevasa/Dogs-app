@@ -23,6 +23,7 @@ export default function Filters() {
     peso: "",
     filters: ["Todos"],
     tempers: [],
+    nombre: "",
   });
   const [page, setPage] = useState(1);
   //setDogsState(dataFiltered(dogsInfo,filtros))
@@ -32,14 +33,37 @@ export default function Filters() {
 
   const handleTempers = (e) => {
     //console.log(filters.tempers.indexOf({ID:e.target.value , nombre:e.target.innerHTML}))
-    if(!(filters.tempers.find((t) => t.ID === e.target.value))){
-    setFilters({...filters, tempers : [...filters.tempers, dogsTempers.find((t) => t.ID === e.target.value)] })
+    if (!filters.tempers.find((t) => t.ID === e.target.value)) {
+      setFilters({
+        ...filters,
+        tempers: [
+          ...filters.tempers,
+          dogsTempers.find((t) => t.ID === e.target.value),
+        ],
+      });
+      setPage(1);
     }
   };
 
   return (
     <div>
       <h1>Probando</h1>
+      <div>
+        <h2>Search bar</h2>
+        <label> buscar: </label>
+        <input
+          onBlur={(e) => {
+            setFilters({
+              order: "A-Z",
+              peso: "",
+              filters: ["Todos"],
+              tempers: [],
+              nombre: e.target.value,
+            });
+            setPage(1);
+          }}
+        ></input>
+      </div>
       <div>
         <h2>Página</h2>
         <button onClick={() => setPage(1)}>{"|<"}</button>
@@ -57,7 +81,7 @@ export default function Filters() {
         ></input>
         <label>/{maxPages}</label>
 
-        <button onClick={() => page != maxPages && setPage(page + 1)}>
+        <button onClick={() => page !== maxPages && setPage(page + 1)}>
           {">"}
         </button>
         <button onClick={() => setPage(maxPages)}>{">|"}</button>
@@ -74,6 +98,7 @@ export default function Filters() {
                 peso: "",
                 order: filters.order === "A-Z" ? "Z-A" : "A-Z",
               });
+              setPage(1);
             }}
           >
             {" "}
@@ -86,6 +111,7 @@ export default function Filters() {
                 ...filters,
                 peso: filters.peso === "asc" ? "des" : "asc",
               });
+              setPage(1);
             }}
           >
             {" "}
@@ -98,6 +124,7 @@ export default function Filters() {
           <select
             onChange={(e) => {
               setFilters({ ...filters, filters: [e.target.value] });
+              setPage(1);
             }}
           >
             <option value={"Todos"}> Todos</option>
@@ -122,7 +149,9 @@ export default function Filters() {
               );
             })
           ) : (
-            <option value={0}>sin datos</option>
+            <option value={0} disabled>
+              sin datos
+            </option>
           )}
         </select>
         {filters.tempers.length > 0 ? (
@@ -133,12 +162,13 @@ export default function Filters() {
                   key={filters.tempers.indexOf(e)}
                   value={filters.tempers.indexOf(e)}
                   onClick={(e) => {
-                    let aux = filters.tempers
-                    aux.splice(e.target.value, 1)
-                     setFilters({
+                    let aux = filters.tempers;
+                    aux.splice(e.target.value, 1);
+                    setFilters({
                       ...filters,
                       tempers: aux,
-                    }); 
+                    });
+                    setPage(1);
                   }}
                 >
                   {e.nombre}
@@ -149,6 +179,22 @@ export default function Filters() {
         ) : (
           <h5>selecciona tempers para filtrar </h5>
         )}
+      </div>
+      <div>
+        <button
+          onClick={(e) => {
+            setFilters({
+              order: "A-Z",
+              peso: "",
+              filters: ["Todos"],
+              tempers: [],
+              nombre: "",
+            });
+            setPage(1);
+          }}
+        >
+          Limpiar filtros
+        </button>
       </div>
       <div>
         <h1> Cartas </h1>
