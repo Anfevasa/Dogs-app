@@ -1,12 +1,22 @@
 export function dataFiltered(array, filters) {
-  //console.log("empezando paginado y filtros")
+  
   let data = array;
   let pages = {};
+  //console.log("empezando paginado y filtros",data)
 
   // filtros 
-  //data = data.filter((e)=> {}) 
+  // origen
   if(filters.filters[0]==="Existentes") data = data.filter(e=>!(isNaN(e.ID)))
   else if(filters.filters[0]==="Creados") data = data.filter(e=>(isNaN(e.ID)))
+  
+
+  // tempers
+  if(filters.tempers.length){
+    filters.tempers.forEach(temper => {
+      data = data.filter(dog => (dog.tempers?dog.tempers.includes(temper.nombre):false))
+    });
+  }
+
   // ordeno por orden alfabético
   if (filters.order === "A-Z") {
     data.sort(function (a, b) {
@@ -22,10 +32,15 @@ export function dataFiltered(array, filters) {
     });
   }
 
-  //data ordenada alfabetica
-  //{1:[dog,dog]
-  // 2:[dog]}
+  //ordeno por peso si hay 
 
+  if (filters.peso){
+    if(filters.peso === "asc") data.sort((a,b)=>a.peso.split("-")[0]-b.peso.split("-")[0]);
+    if(filters.peso === "des") data.sort((a,b)=>b.peso.split("-")[0]-a.peso.split("-")[0]);
+  }
+
+  
+ //paginado
   let j = 0;
   let i = 1;
   while (j < data.length) {

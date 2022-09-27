@@ -1,27 +1,41 @@
 import React, { useEffect, useState } from "react";
 import AllCards from "../Components/AllCards";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllDogs } from "../redux/Actions";
+import { getAllDogs, getAllTempers } from "../redux/Actions";
 import { dataFiltered } from "../Validators/Filters";
 
 export default function Filters() {
   let dogsInfo = useSelector((state) => state.dogsCopy);
+  let dogsTempers = useSelector((state) => state.tempers);
   let filtros = useSelector((state) => state.filters);
   const dispatch = useDispatch();
   useEffect(() => {
     async function getData() {
       await dispatch(getAllDogs());
+      await dispatch(getAllTempers());
     }
     getData();
   }, [dispatch]);
 
   const [dogsState, setDogsState] = useState({});
-  const [filters,setFilters] = useState({order:"A-Z",filters:["Todos"]});
+  const [filters, setFilters] = useState({
+    order: "A-Z",
+    peso: "",
+    filters: ["Todos"],
+    tempers: [],
+  });
   const [page, setPage] = useState(1);
   //setDogsState(dataFiltered(dogsInfo,filtros))
 
-  let pages = dogsInfo.length > 0 && dataFiltered(dogsInfo,filters);
+  let pages = dogsInfo.length > 0 && dataFiltered(dogsInfo, filters);
   let maxPages = dogsInfo.length > 0 && Object.keys(pages).length;
+
+  const handleTempers = (e) => {
+    //console.log(filters.tempers.indexOf({ID:e.target.value , nombre:e.target.innerHTML}))
+    if(!(filters.tempers.find((t) => t.ID === e.target.value))){
+    setFilters({...filters, tempers : [...filters.tempers, dogsTempers.find((t) => t.ID === e.target.value)] })
+    }
+  };
 
   return (
     <div>
@@ -41,31 +55,104 @@ export default function Filters() {
               setPage(e.target.value);
           }}
         ></input>
+        <label>/{maxPages}</label>
 
         <button onClick={() => page != maxPages && setPage(page + 1)}>
           {">"}
         </button>
         <button onClick={() => setPage(maxPages)}>{">|"}</button>
-
       </div>
       <div>
-        <h2>Filtros</h2>
+        <h2>FILTROS</h2>
         <div>
-          <h5> orden: </h5> 
-          <button onClick={()=>{setFilters({...filters, order:filters.order==="A-Z"?"Z-A":"A-Z"})}}> {/* filters.includes("A-Z")?"A-Z":"Z-A" */ filters.order}</button>
+          <h4> Orden </h4>
+          <label> nombre: </label>
+          <button
+            onClick={() => {
+              setFilters({
+                ...filters,
+                peso: "",
+                order: filters.order === "A-Z" ? "Z-A" : "A-Z",
+              });
+            }}
+          >
+            {" "}
+            {filters.order}
+          </button>
+          <label> peso: </label>
+          <button
+            onClick={() => {
+              setFilters({
+                ...filters,
+                peso: filters.peso === "asc" ? "des" : "asc",
+              });
+            }}
+          >
+            {" "}
+            {filters.peso || "peso"}
+          </button>
         </div>
         <div>
-          <h5> creados: </h5>
-          <select onChange={(e)=>{setFilters({...filters, filters:[e.target.value]})}}>
+          <h4> Creados </h4>
+          <label>origen:</label>
+          <select
+            onChange={(e) => {
+              setFilters({ ...filters, filters: [e.target.value] });
+            }}
+          >
             <option value={"Todos"}> Todos</option>
             <option value={"Existentes"}> Existentes</option>
             <option value={"Creados"}> Creados</option>
-          </select> 
+          </select>
         </div>
       </div>
       <div>
-       <h1> Cartas </h1> 
-      {dogsInfo.length > 0 ? (
+        <label> Tempers: </label>
+        <select name="tempers" value={0} onChange={(e) => handleTempers(e)}>
+          <option value={0} disabled>
+            {" "}
+            select tempers
+          </option>
+          {dogsTempers.length ? (
+            dogsTempers.map((temper) => {
+              return (
+                <option key={temper.ID} value={temper.ID}>
+                  {temper.nombre}
+                </option>
+              );
+            })
+          ) : (
+            <option value={0}>sin datos</option>
+          )}
+        </select>
+        {filters.tempers.length > 0 ? (
+          <ul>
+            {filters.tempers.map((e) => {
+              return (
+                <li
+                  key={filters.tempers.indexOf(e)}
+                  value={filters.tempers.indexOf(e)}
+                  onClick={(e) => {
+                    let aux = filters.tempers
+                    aux.splice(e.target.value, 1)
+                     setFilters({
+                      ...filters,
+                      tempers: aux,
+                    }); 
+                  }}
+                >
+                  {e.nombre}
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <h5>selecciona tempers para filtrar </h5>
+        )}
+      </div>
+      <div>
+        <h1> Cartas </h1>
+        {dogsInfo.length > 0 ? (
           <AllCards dogsArray={pages[page]} />
         ) : (
           <h4>no hay datos aún</h4>
