@@ -2,48 +2,71 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../redux/Actions";
 import { getAllTempers } from "../redux/Actions";
-import { validator } from "../Validators/Validators";
+import { errorObj, validator } from "../Validators/Validators";
 
 export default function CreateDog() {
   const [newDog, setNewDog] = useState({
-    nombre: "",
-    altura: "",
-    peso: "",
-    vida: "",
-    img: "",
-    tempers: [],
+    img: ""
   });
+
   let dogsTempers = useSelector((state) => state.tempers);
   const [newDogTempers, setNewDogTempers] = useState([]);
   const [validDog, setValidDog] = useState(true);
 
   function handleChange(e) {
     e.preventDefault();
-    console.log(validator(e));
-    //console.log(e.target.name);
+    validator(e);
+
     setNewDog({
       ...newDog,
       [e.target.name]: e.target.value,
     });
+
+    if (
+      Object.keys(newDog).length === 9 &&
+      Object.keys(errorObj).length === 0
+    ) {
+      console.log(newDog);
+      setValidDog(false);
+    } else setValidDog(true);
   }
+
   function handleTempers(e) {
     e.preventDefault();
     setNewDogTempers([...newDogTempers, Number(e.target.value)]);
-    console.log(newDogTempers);
-    let tempersString = newDogTempers.join(", ");
-    const label = document.getElementById("labelTempers");
-    label.innerHTML = tempersString;
+    setNewDog({
+      ...newDog,
+      tempers: newDogTempers,
+    });
+
+    if (
+      Object.keys(newDog).length === 9 &&
+      Object.keys(errorObj).length === 0
+    ) {
+      setValidDog(false);
+    } else setValidDog(true);
   }
 
-  function validateDog(dogState) {
-    return true;
+  function formatDog() {
+    return {
+      nombre: newDog.nombre,
+      altura: newDog.minAltura + " - " + newDog.maxAltura,
+      peso: newDog.minPeso + " - " + newDog.maxPeso,
+      vida: newDog.minVida + " - " + newDog.maxVida + " years",
+      img: newDog.img,
+      tempers: newDogTempers,
+    };
   }
 
   const dispatch = useDispatch();
   function handleSubmit(e) {
     e.preventDefault();
-    if (validateDog(newDog)) {
-      dispatch(actions.postDog(newDog));
+    //console.log(formatDog())
+    try {
+      dispatch(actions.postDog(formatDog()));
+      alert("perrito creado :D");
+    } catch (error) {
+      console.log(error.message);
     }
   }
 
@@ -52,7 +75,6 @@ export default function CreateDog() {
       await dispatch(getAllTempers());
     }
     getTempers();
-    //console.log("info", dogsState);
   }, [dispatch]);
 
   return (
@@ -146,9 +168,18 @@ export default function CreateDog() {
             <option value={0}>sin datos</option>
           )}
         </select>
+        <label>
+          {newDogTempers
+            .map((id) => dogsTempers.find((dog) => dog.ID == id).nombre)
+            .join(", ")}{" "}
+        </label>
         <label name="errorTempers" id="labelTempers">
           {" "}
         </label>
+        <button type="submit" disabled={validDog ? true : false}>
+          {" "}
+          Crear{" "}
+        </button>
       </form>
     </div>
   );

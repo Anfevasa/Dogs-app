@@ -1,3 +1,5 @@
+export var errorObj = {};
+
 const nombreValidator = (str) => {
   if (!/^[A-Za-z\s]*$/.test(str)) return "Nombre solo puede contener letras";
   if (str.length > 20) return "Nombre demasiado largo";
@@ -53,33 +55,46 @@ const maxVidaValidator = (str) => {
   return false;
 };
 const imgValidator = (str) => {
-    if(!(/^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg|bmp)$/.test(str))) return "URL inválida"
-    return false;
-}
+  if (!/^https?:\/\/.+\.(jpg|jpeg|png|webp|avif|gif|svg|bmp)$/.test(str))
+    return "URL inválida";
+  return false;
+};
 
 export function validator(e) {
-    // ---- nombre -----
+  // ---- nombre -----
   if (e.target.name == "nombre") {
     let error = nombreValidator(e.target.value);
     let errorLabel = document.getElementById("errorNombre");
     if (error) {
       errorLabel.innerHTML = error;
-    } else errorLabel.innerHTML = "";
+      errorObj[e.target.name] = error;
+    } else {
+        errorLabel.innerHTML = "";
+        delete errorObj[e.target.name];
+      }
   }
   // ---- altura -----
-  if (e.target.name == "minAltura"){
+  if (e.target.name == "minAltura") {
     let error = minAlturaValidator(e.target.value);
     let errorLabel = document.getElementById("errorAltura");
     if (error) {
       errorLabel.innerHTML = error;
-    } else errorLabel.innerHTML = "";
+      errorObj[e.target.name] = error;
+    } else {
+      errorLabel.innerHTML = "";
+      delete errorObj[e.target.name];
+    }
   }
-  if (e.target.name == "maxAltura"){
+  if (e.target.name == "maxAltura") {
     let error = maxAlturaValidator(e.target.value);
     let errorLabel = document.getElementById("errorAltura");
     if (error) {
       errorLabel.innerHTML = error;
-    } else errorLabel.innerHTML = "";
+      errorObj[e.target.name] = error;
+    } else {
+      errorLabel.innerHTML = "";
+      delete errorObj[e.target.name];
+    }
   }
   // ---- peso -----
   if (e.target.name == "minPeso") {
@@ -87,31 +102,58 @@ export function validator(e) {
     let errorLabel = document.getElementById("errorPeso");
     if (error) {
       errorLabel.innerHTML = error;
-    } else errorLabel.innerHTML = "";
+      errorObj[e.target.name] = error;
+    } else {
+      errorLabel.innerHTML = "";
+      delete errorObj[e.target.name];
+    }
   }
-  if (e.target.name == "maxPeso"){
+  if (e.target.name == "maxPeso") {
     let error = maxPesoValidator(e.target.value);
     let errorLabel = document.getElementById("errorPeso");
     if (error) {
       errorLabel.innerHTML = error;
-    } else errorLabel.innerHTML = "";
-  };
+      errorObj[e.target.name] = error;
+    } else {
+      errorLabel.innerHTML = "";
+      delete errorObj[e.target.name];
+    }
+  }
   // ---- vida -----
-  if (e.target.name == "minVida"){
+  if (e.target.name == "minVida") {
     let error = minVidaValidator(e.target.value);
     let errorLabel = document.getElementById("errorVida");
     if (error) {
       errorLabel.innerHTML = error;
-    } else errorLabel.innerHTML = "";
-  };
+      errorObj[e.target.name] = error;
+    } else {
+      errorLabel.innerHTML = "";
+      delete errorObj[e.target.name];
+    }
+  }
+  if (e.target.name == "maxVida") {
+    let error = maxVidaValidator(e.target.value);
+    let errorLabel = document.getElementById("errorVida");
+    if (error) {
+      errorLabel.innerHTML = error;
+      errorObj[e.target.name] = error;
+    } else {
+      errorLabel.innerHTML = "";
+      delete errorObj[e.target.name];
+    }
+  }
   // ---- IMG -----
-  if (e.target.name == "img"){
+  if (e.target.name == "img") {
     let error = imgValidator(e.target.value);
     let errorLabel = document.getElementById("errorImg");
     if (error) {
       errorLabel.innerHTML = error;
-    } else errorLabel.innerHTML = "";
-  };
+      errorObj[e.target.name] = error;
+    } else {
+      errorLabel.innerHTML = "";
+      delete errorObj[e.target.name];
+    }
+  }
 
-  return "Tiene buena pinta";
+  return errorObj;
 }
