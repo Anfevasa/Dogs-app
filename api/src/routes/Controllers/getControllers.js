@@ -139,7 +139,9 @@ const getDogByID = async (req, res) => {
 const getTemperaments = async (req, res) => {
   let dbData;
   try {
-    dbData = await Temper.findAll();
+    dbData = await Temper.findAll({
+      attributes: { exclude: ["createdAt", "updatedAt"]}}
+    );
     res.json(dbData);
   } catch (e) {
     res.status(400).json({ DB_err: e.message });

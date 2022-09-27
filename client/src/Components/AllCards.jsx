@@ -7,7 +7,7 @@ import { getAllDogs } from "../redux/Actions";
 //paginado y renderizado de cartas
 
 export default function AllCards() {
-  let dogsState = useSelector((state) => state.dogs);
+  let dogsState = useSelector((state) => state.dogsCopy);
   const dispatch = useDispatch();
   useEffect(() => {
     async function getData(){await dispatch(getAllDogs());}

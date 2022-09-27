@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
     <div>
-      <h1> Home </h1>
-      <h3> Filtros </h3>
-      <h3> Create </h3>
+      <Link to="/"> Home </Link>
+      <Link to="/dogs"> Filtros </Link>
+      <Link to="/create"> Create </Link>
       <h3> About </h3>
       <h3> Favorites </h3>
       <h3> Quiz </h3>
