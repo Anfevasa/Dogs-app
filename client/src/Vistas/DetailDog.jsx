@@ -1,4 +1,4 @@
-import React , {useEffect, useState} from "react";
+import React , {useEffect} from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDogByID } from "../redux/Actions";
@@ -12,10 +12,9 @@ export default function DetailDog() {
       await dispatch(getDogByID(id));
     }
     getData();
-  }, [dispatch]);
+  }, [dispatch,id]);
 
   let dogInfo = useSelector((state) => state.detail);
-  const [dogState,setDogState] = useState(dogInfo)
 
   return (
     <div>

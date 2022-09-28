@@ -5,6 +5,7 @@ import Home from './Vistas/Home';
 import Filters from './Vistas/Filters'
 import CreateDog from './Vistas/CreateDog'
 import DetailDog from './Vistas/DetailDog'
+import Favorites from './Vistas/Favorites';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route exact path="/dogs" component={Filters} />
       <Route path="/dogs/:id" component={DetailDog} />
       <Route exact path="/create" component={CreateDog} />
+      <Route exact path="/favorites" component={Favorites}/>
     </div>
   );
 }

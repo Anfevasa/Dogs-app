@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AllCards from "../Components/AllCards";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllDogs, getAllTempers, saveFilters } from "../redux/Actions";
-import { dataFiltered } from "../Validators/Filters";
+import { dataFiltered } from "../Utils/Filters";
 
 export default function Filters() {
   let dogsInfo = useSelector((state) => state.dogsCopy);

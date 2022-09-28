@@ -1,10 +1,17 @@
-import { GET_ALL, GET_BY_ID, GET_TEMPERS, POST_DOG, SAVE_FILTERS } from "./Actions";
+import {
+  ADD_FAVORITES,
+  GET_ALL,
+  GET_BY_ID,
+  GET_TEMPERS,
+  POST_DOG,
+  SAVE_FILTERS,
+} from "./Actions";
 
 let initialState = {
   dogs: [],
   detail: {},
   dogsCopy: [],
-  tempers: [],  
+  tempers: [],
   favorites: [],
   filters: {
     order: "A-Z",
@@ -12,7 +19,7 @@ let initialState = {
     filters: ["Todos"],
     tempers: [],
     nombre: "",
-  }
+  },
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -21,20 +28,19 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return { ...state, dogsCopy: payload };
 
     case GET_BY_ID:
-      return {...state, detail: payload};
+      return { ...state, detail: payload };
 
     case GET_TEMPERS:
-      return {...state, tempers: payload};
+      return { ...state, tempers: payload };
 
     case POST_DOG:
       return { ...state, dogsCopy: payload };
 
     case SAVE_FILTERS:
-      return { ...state, filters: payload};
+      return { ...state, filters: payload };
 
-    
-
-
+    case ADD_FAVORITES:
+      return { ...state, favorites: [...state.favorites, payload] };
 
     default:
       return state;

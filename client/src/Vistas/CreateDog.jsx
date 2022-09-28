@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../redux/Actions";
 import { getAllTempers } from "../redux/Actions";
-import { errorObj, validator } from "../Validators/Validators";
+import { errorObj, validator } from "../Utils/Validators";
 
 export default function CreateDog() {
   // Genero los estados necesarios y traigo los tempers de la store

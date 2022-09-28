@@ -1,10 +1,11 @@
 import axios from "axios";
 
 export const GET_ALL = "GET_ALL";
-export const GET_BY_ID = "GET_BY_ID"
+export const GET_BY_ID = "GET_BY_ID";
 export const GET_TEMPERS = "GET_TEMPERS";
 export const POST_DOG = "POST_DOG";
-export const SAVE_FILTERS = "SAVE_FILTERS"
+export const SAVE_FILTERS = "SAVE_FILTERS";
+export const ADD_FAVORITES = "ADD_FAVORITES";
 
 export const getAllDogs = () => {
   return async (dispatch) => {
@@ -28,15 +29,21 @@ export const getAllTempers = () => {
   };
 };
 
-export const postDog = (dogDetail) => {  
+export const postDog = (dogDetail) => {
   return async (dispatch) => {
     let dogCreated = await axios.post("http://localhost:3001/dogs", dogDetail);
-    dispatch({type: POST_DOG, payload: dogCreated.data})
+    dispatch({ type: POST_DOG, payload: dogCreated.data });
   };
 };
 
-export const saveFilters = (filters)=>{
+export const saveFilters = (filters) => {
   return (dispatch) => {
-    dispatch({type: SAVE_FILTERS, payload: filters})
-  }
-}
+    dispatch({ type: SAVE_FILTERS, payload: filters });
+  };
+};
+
+export const addFavorites = (dog) => {
+  return (dispatch) => {
+    dispatch({ type: ADD_FAVORITES, payload: dog });
+  };
+};

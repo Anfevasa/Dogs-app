@@ -7,8 +7,7 @@ export default function Home() {
       <Link to="/"> Home </Link>
       <Link to="/dogs"> Filtros </Link>
       <Link to="/create"> Create </Link>
-      <h3> About </h3>
-      <h3> Favorites </h3>
+      <Link to="/favorites"> Favorites </Link>
       <h3> Quiz </h3>
     </div>
   );
