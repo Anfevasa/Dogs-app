@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AllCards from "../Components/AllCards";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllDogs, getAllTempers, saveFilters } from "../redux/Actions";
+import { saveFilters } from "../redux/Actions";
 import { dataFiltered } from "../Utils/Filters";
 
 export default function Filters() {
@@ -10,15 +10,6 @@ export default function Filters() {
   let filtros = useSelector((state) => state.filters);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    async function getData() {
-      await dispatch(getAllDogs());
-      await dispatch(getAllTempers());
-    }
-    getData();
-    
-  }, [dispatch]);
-
   useEffect(() => {
     let copiaFilters = {...filters}
     return ()=>dispatch(saveFilters(copiaFilters));
@@ -29,8 +20,7 @@ export default function Filters() {
   //setDogsState(dataFiltered(dogsInfo,filtros))
 
   let pages = dogsInfo.length > 0 && dataFiltered(dogsInfo, filters);
-  let maxPages = dogsInfo.length > 0 && Object.keys(pages).length;
-  
+  let maxPages = dogsInfo.length > 0 && Object.keys(pages).length;  
 
   const handleTempers = (e) => {
     //console.log(filters.tempers.indexOf({ID:e.target.value , nombre:e.target.innerHTML}))

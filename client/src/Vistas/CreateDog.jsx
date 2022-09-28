@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../redux/Actions";
-import { getAllTempers } from "../redux/Actions";
 import { errorObj, validator } from "../Utils/Validators";
 
 export default function CreateDog() {
@@ -78,14 +77,6 @@ export default function CreateDog() {
       console.log(error.message);
     }
   }
-
-  // Traigo tempers al montar el componente
-  useEffect(() => {
-    async function getTempers() {
-      await dispatch(getAllTempers());
-    }
-    getTempers();
-  }, [dispatch]);
 
   return (
     <div>
