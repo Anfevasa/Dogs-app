@@ -14,7 +14,7 @@ export default function AllCards({dogsArray}) {
       {dogsArray ? (
         dogsArray.map((dog) => (dog &&
           <div key={dog.ID}>
-            <Link to = {`/${dog.ID}`}>
+            <Link to = {`/dogs/${dog.ID}`}>
               <Card props={dog} />
             </Link>
           </div>

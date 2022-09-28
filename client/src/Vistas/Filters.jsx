@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import AllCards from "../Components/AllCards";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllDogs, getAllTempers } from "../redux/Actions";
+import { getAllDogs, getAllTempers, saveFilters } from "../redux/Actions";
 import { dataFiltered } from "../Validators/Filters";
 
 export default function Filters() {
   let dogsInfo = useSelector((state) => state.dogsCopy);
   let dogsTempers = useSelector((state) => state.tempers);
   let filtros = useSelector((state) => state.filters);
+
   const dispatch = useDispatch();
   useEffect(() => {
     async function getData() {
@@ -15,21 +16,21 @@ export default function Filters() {
       await dispatch(getAllTempers());
     }
     getData();
+    
   }, [dispatch]);
 
-  const [dogsState, setDogsState] = useState({});
-  const [filters, setFilters] = useState({
-    order: "A-Z",
-    peso: "",
-    filters: ["Todos"],
-    tempers: [],
-    nombre: "",
-  });
+  useEffect(() => {
+    let copiaFilters = {...filters}
+    return ()=>dispatch(saveFilters(copiaFilters));
+      }, [dispatch]);
+
+  const [filters, setFilters] = useState({...filtros});
   const [page, setPage] = useState(1);
   //setDogsState(dataFiltered(dogsInfo,filtros))
 
   let pages = dogsInfo.length > 0 && dataFiltered(dogsInfo, filters);
   let maxPages = dogsInfo.length > 0 && Object.keys(pages).length;
+  
 
   const handleTempers = (e) => {
     //console.log(filters.tempers.indexOf({ID:e.target.value , nombre:e.target.innerHTML}))
