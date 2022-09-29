@@ -22,7 +22,7 @@ export default function DetailDog() {
       {Object.keys(dogInfo).length ?
       <div>
         <h1>{dogInfo.nombre}</h1>
-        <img src={dogInfo.img} alt={dogInfo.ID} />
+        <img src={dogInfo.img} alt={dogInfo.ID} width="1000"/>
         <h3> Altura </h3>
         <h5> {dogInfo.altura} cm</h5>
         <h3> Peso </h3>

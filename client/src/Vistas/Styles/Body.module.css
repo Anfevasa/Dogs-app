@@ -57,6 +57,9 @@ li {
 input{
   border: 1px solid #a60ce8;
 }
+hr{
+  border: 1px solid #900bc8;
+}
 /* div{
   border:1px solid gray;
 } */

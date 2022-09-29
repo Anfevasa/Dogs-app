@@ -7,11 +7,13 @@ import CreateDog from "./Vistas/CreateDog";
 import DetailDog from "./Vistas/DetailDog";
 import Favorites from "./Vistas/Favorites";
 import Quiz from "./Vistas/Quiz";
+import Home from "./Vistas/Home";
 
 function App() {
   return (
     <div className="App">
       <Nav />
+      <Route exact path="/" component={Home} />
       <Route exact path="/dogs" component={Filters} />
       <Route path="/dogs/:id" component={DetailDog} />
       <Route exact path="/create" component={CreateDog} />

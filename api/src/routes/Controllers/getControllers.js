@@ -108,18 +108,19 @@ const getDogByID = async (req, res) => {
       apiData = await axios.get(
         `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
       );
-      if (id <= apiData.data.length) {
-        id = Number(id);
-        let dogData = apiData.data.find((dog) => dog.id == id);
+      let validIds = apiData.data.map((dog)=>dog.id)
+      id = Number(id);
+      if (validIds.indexOf(id) !== -1) {
+        let dogData = apiData.data.find((dog) => dog.id == Number(id));
 
         if (Object.keys(dogData).length) {
           dog = {
             ID: dogData.id,
-            nombre: dogData.name,
-            altura: dogData.height.metric,
-            peso: dogData.weight.metric,
-            vida: dogData.life_span,
-            img: dogData.image.url,
+            nombre: dogData.name ? dogData.name : "",
+            altura: dogData.height.metric ? dogData.height.metric : "",
+            peso: dogData.weight.metric ? dogData.weight.metric : "" ,
+            vida: dogData.life_span ? dogData.life_span: "",
+            img: dogData.image.url ? dogData.image.url: "",
           };
         }
         res.json(dog);
@@ -128,12 +129,6 @@ const getDogByID = async (req, res) => {
       res.status(400).json({ API_err: e.message });
     }
   }
-
-  /*allDogs.length
-    ? res.json(allDogs)
-    : res.status(404).json({ error: "Dog not found" });
-
-  //res.send(`apikey ${API_KEY}`)*/
 };
 
 const getTemperaments = async (req, res) => {
