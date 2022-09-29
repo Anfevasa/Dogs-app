@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../Components/Card";
 import * as actions from "../redux/Actions";
 import { errorObj, validator } from "../Utils/Validators";
 import S from "./Styles/Create.module.css";
+import { getAllDogs } from "../redux/Actions";
 
 export default function CreateDog() {
   // Genero los estados necesarios y traigo los tempers de la store
@@ -87,6 +88,13 @@ export default function CreateDog() {
       console.log(error.message);
     }
   }
+
+  useEffect(() => {
+    async function getData() {
+      await dispatch(getAllDogs());
+    }
+    return ()=>getData();
+  }, [dispatch]);
 
   return (
     <div>

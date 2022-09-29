@@ -12,10 +12,10 @@ export default function Home({ props, fav }) {
       <p>
         De pequeños, todos quisimos tener un perro, sin embargo, una vez
         nuestros padres accedían a tener uno, llega el segundo problema, ¿cuál
-        perro?, se abre un montón de posibilidades, altos, bajos, gordos,
+        perro? Se abren un mundo de posibilidades, altos, bajos, gordos,
         flacos, peludos, etc... Muchos tomaron esta decisión basándose solo en
         lo que veían sus ojos; Aquí creemos que lo más importante es lo que va
-        por dentro. (revisar este párrafo) Esta app te ayudará a elegir el perro
+        por dentro. Esta app te ayudará a elegir el perro
         que te acompañará y te dará los mejores momentos de tu vida. Para esto
         te facilitamos las siguientes herramientas:
       </p>

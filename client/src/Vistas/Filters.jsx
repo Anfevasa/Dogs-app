@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AllCards from "../Components/AllCards";
 import { useSelector, useDispatch } from "react-redux";
 import { saveFilters } from "../redux/Actions";
@@ -126,7 +126,7 @@ export default function Filters() {
             {filters.peso || "peso"}
           </button>
         </div>
-        {filters?dispatch(saveFilters(filters)):console.log("???")}
+        {filters ? dispatch(saveFilters(filters)) : console.log("???")}
       </div>
 
       <div className={S.DivShowTempers}>

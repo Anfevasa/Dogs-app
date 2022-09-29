@@ -27,19 +27,24 @@ export default function Nav() {
       <div className={S.LinksContainer}>
         <Link className={S.Link} to="/"> Home 
           <div/>
-        </Link>
-        <Link className={S.Link} to="/dogs"> Filtros
-          <div/>        
-        </Link>
-        <Link className={S.Link} to="/create"> Create
-          <div/>
-         </Link>
-        <Link className={S.Link} to="/favorites"> Favorites
-          <div/>
-         </Link>
+        </Link>       
+        
         <Link className={S.Link} to="/quiz"> Quiz 
           <div/>
         </Link>
+
+        <Link className={S.Link} to="/favorites"> Favorites
+          <div/>
+        </Link>
+
+        <Link className={S.Link} to="/dogs"> Filtros
+          <div/>        
+        </Link>
+
+        <Link className={S.Link} to="/create"> Create
+          <div/>
+        </Link>
+
       </div>     
     </div>
   );
