@@ -12,10 +12,6 @@ export default function Filters() {
   let filtros = useSelector((state) => state.filters);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    let copiaFilters = { ...filters };
-    return () => dispatch(saveFilters(copiaFilters));
-  }, [dispatch]);
 
   const [filters, setFilters] = useState({ ...filtros });
   const [page, setPage] = useState(1);
@@ -130,6 +126,7 @@ export default function Filters() {
             {filters.peso || "peso"}
           </button>
         </div>
+        {filters?dispatch(saveFilters(filters)):console.log("???")}
       </div>
 
       <div className={S.DivShowTempers}>
