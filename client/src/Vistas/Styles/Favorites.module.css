@@ -1,0 +1,23 @@
+.Title{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.divLike{
+    display: flex;
+    justify-content: center;
+}
+.LikeContainer{
+    width: fit-content;
+    padding: 5px 15px;
+    border: 2px solid #C978CB;
+    border-radius: 2%;
+    background-color: snow;
+    box-shadow: 2px 2px 7px 1px rgba(176,0,141,0.58);
+}
+.LikeTitle{
+    color: #a60ce8;    
+}
+.LikeButton{
+    height: 50px;
+    width: 30%;
+    font-size: 25px;
+}

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import AllCards from "../Components/AllCards";
 import Card from "../Components/Card";
 import { dogClones } from "../Utils/Quiz";
 
@@ -77,7 +76,7 @@ export default function Quiz() {
       </div>
       <div>
         <p>
-            Los perros que más se adaptan a tu personalidad
+            Los perros que más se adaptan a tu personalidad son
         </p>
         {/* <div>
             {bestDogs?

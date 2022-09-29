@@ -54,6 +54,9 @@ li {
   display: flex;
   align-items: center;
 } 
+input{
+  border: 1px solid #a60ce8;
+}
 /* div{
   border:1px solid gray;
 } */

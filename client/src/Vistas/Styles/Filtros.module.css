@@ -1,0 +1,35 @@
+.Title{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.DivMayor{
+    padding: 15 px;
+    display: flex;
+    justify-content: space-around;
+}
+.DivNombre{
+    width: 30%;
+}
+.DivFiltros{    
+    width: 30%;
+    border-right: 2px solid #900bc8;
+    border-left: 2px solid #900bc8;
+}
+.DivOrden{
+    width: 30%;
+}
+.DivShowTempers{
+    margin: 10px;
+    border: 5px solid rgba(200, 200, 200, 0.498);
+}
+.DivPagination{    
+    background-color:  rgba(200, 200, 200, 0.498);
+    display: flex; 
+    justify-content: center;
+
+}
+
+.ResultsTitle{
+    width: 60%;
+    padding: 5px;
+}
