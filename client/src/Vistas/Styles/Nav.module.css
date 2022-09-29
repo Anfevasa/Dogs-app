@@ -1,0 +1,37 @@
+
+.Nav{
+    display: flex;
+    height: 75px;
+    background-color: #900bc8;
+}
+
+.Logo{
+    height: 60px;
+    width: 60px;
+    margin: 5px 0px 0px 15px;
+}
+
+.LogoContainer{
+    display: flex;
+    height: fit-content;
+    width: 50%;
+    align-content: center;    
+}
+
+.LinksContainer{
+    display: flex;
+    justify-content: space-evenly;    
+    width: 50%;
+}
+.Link{    
+    height: auto;
+    text-align: center;
+    width:20%;
+    color: white   
+}
+
+.Link:hover{
+    background-color: white;
+    border: 1px solid white;
+    color: #900bc8; 
+}

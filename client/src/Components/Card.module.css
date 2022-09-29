@@ -1,0 +1,41 @@
+
+.Card{
+    height: auto;
+    width: 300px;
+    overflow: hidden;
+    margin: auto;
+    padding: 10px 30px;
+    border-radius: 2%;
+    border: 1px solid grey;
+    transition: all .4s ease-in-out;    
+    box-shadow: 4px 4px 12px 0px rgba(81,81,81,0.94);
+    text-align: center;    
+    background: #A60CE8;
+    background: linear-gradient(45deg, #A60CE8 0%, #C978CB 32%, #FFFFFF 100%);
+    vertical-align: auto;
+}
+
+.CardName{
+    color: #FFFFFF;
+    text-decoration: underline;
+    text-shadow: -1px 1px 1px rgba(0,0,0,0.98);
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.CardName:hover{
+    color: #A60CE8;
+}
+
+.CardTitle{
+    color: #FFFFFF;
+    height: 2px;
+}
+
+.CardText{
+    color: #FFFFFF;
+}
+.Detail{
+    background-color: rgba(255, 255, 255, 0.572);
+    border-radius: 10%;
+    padding: 2px 2px;
+    color: #900bc8;
+}

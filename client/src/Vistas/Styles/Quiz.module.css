@@ -1,0 +1,51 @@
+.TempersContainer{
+    justify-content: space-between;
+    display:flex;
+    flex-wrap: wrap;
+    width: fit-content;
+}
+
+.TempersDiv{
+    display: grid;
+    justify-content: center;
+    margin: 5px;
+    background-color: rgba(200, 200, 200, 0.498);
+}
+
+.Title{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.CardAlikeContainer{
+    margin: 2%;
+    border: 5px solid #a60ce8;
+    background-color: rgba(223, 223, 223, 0.464);;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 15px;
+}
+
+.CardAlike {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #C978CB;
+    border-radius: 2%;
+    display: flex;
+    justify-content: space-around;
+    width: fit-content;
+    padding: 2%;
+    margin: 5px;
+}
+.CardAlikeDetail{
+    color: #a60ce8;
+    margin: 5px;
+    display:grid;
+    align-content: center;
+}
+.Percentages{
+    color: white;
+    border-radius: 10%;
+    background: #A60CE8;
+    background: linear-gradient(45deg, #A60CE8 0%, #C978CB 32%, #A60CE8 100%);
+    
+}

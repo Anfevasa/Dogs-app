@@ -1,0 +1,13 @@
+
+.Contenedor{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: auto;
+    gap: 5px;
+    margin: 2%;
+    justify-items: center;
+    align-items: center;
+    padding: 1%;
+    border: 5px solid #A60CE8;
+    background-color: rgba(223, 223, 223, 0.464);
+}
