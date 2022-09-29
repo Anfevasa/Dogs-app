@@ -4,7 +4,7 @@ import { useDispatch,  useSelector} from "react-redux";
 import { addFavorites } from "../redux/Actions";
 import C from './Card.module.css'
 
-export default function Card({ props }) {
+export default function Card({ props , fav }) {
   const dispatch = useDispatch();
   const favorites = useSelector(state => state.favorites)
 
@@ -25,7 +25,7 @@ export default function Card({ props }) {
         <h4 className={C.CardTitle}>Tempers: </h4>
         <h5 className={C.CardText}>{props.tempers}</h5>
       </div>
-      <button className={C.button} onClick={e=>handleClick(e,props)} disabled={favorites.find(d => d.ID === props.ID)?true:false}> Añadir a favoritos ♡</button>
+      <button className={C.button} onClick={e=>handleClick(e,props)} disabled={fav || favorites.find(d => d.ID === props.ID)?true:false}> Añadir a favoritos ♡</button>
     </div>
   );
 }

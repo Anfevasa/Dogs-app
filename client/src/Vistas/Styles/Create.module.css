@@ -1,0 +1,40 @@
+.Title{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.DivMayor{
+    display: flex;
+    justify-content: space-around;
+}
+
+.DivForm{
+    width: 50%;
+    border-right: 2px solid #a60ce8;
+}
+
+.Previa{
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #C978CB;
+    border-radius: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: fit-content;
+    padding: 2%;
+    margin: 5px;
+    box-shadow: 1px 1px 5px 1px rgba(176,0,141,0.58);
+    
+}
+
+.NombreCat{
+    margin: 5px;
+}
+
+.SubmitButton{
+    margin: 20px;
+    width: 150px;
+}
+
+.SubmitButton:disabled{
+    background-color: gray;
+}

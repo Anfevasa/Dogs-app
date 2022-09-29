@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { saveFilters } from "../redux/Actions";
 import { dataFiltered } from "../Utils/Filters";
 
-import S from "./Styles/Filtros.module.css"
+import S from "./Styles/Filtros.module.css";
 
 export default function Filters() {
   let dogsInfo = useSelector((state) => state.dogsCopy);
@@ -13,15 +13,15 @@ export default function Filters() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    let copiaFilters = {...filters}
-    return ()=>dispatch(saveFilters(copiaFilters));
-      }, [dispatch]);
+    let copiaFilters = { ...filters };
+    return () => dispatch(saveFilters(copiaFilters));
+  }, [dispatch]);
 
-  const [filters, setFilters] = useState({...filtros});
+  const [filters, setFilters] = useState({ ...filtros });
   const [page, setPage] = useState(1);
 
   let pages = dogsInfo.length > 0 && dataFiltered(dogsInfo, filters);
-  let maxPages = dogsInfo.length > 0 && Object.keys(pages).length;  
+  let maxPages = dogsInfo.length > 0 && Object.keys(pages).length;
 
   const handleTempers = (e) => {
     if (!filters.tempers.find((t) => t.ID === e.target.value)) {
@@ -39,6 +39,10 @@ export default function Filters() {
   return (
     <div>
       <h1 className={S.Title}>Filtrados</h1>
+      <p>
+        Grandes, viejos, inquietos, nuevos... Aquí tendrás acceso a todos los
+        perros, filtra y ordena hasta encontrar tu favorito
+      </p>
 
       <div className={S.DivMayor}>
         <div className={S.DivNombre}>
@@ -61,7 +65,7 @@ export default function Filters() {
         <div className={S.DivFiltros}>
           <h2>Filtros</h2>
           <div>
-            <label>Origen:  </label>
+            <label>Origen: </label>
             <select
               onChange={(e) => {
                 setFilters({ ...filters, filters: [e.target.value] });
@@ -95,8 +99,6 @@ export default function Filters() {
               )}
             </select>
           </div>
-
-
         </div>
         <div className={S.DivOrden}>
           <h2> Orden </h2>
@@ -132,33 +134,33 @@ export default function Filters() {
 
       <div className={S.DivShowTempers}>
         {filters.tempers.length > 0 ? (
-            <ul>
-              {filters.tempers.map((e) => {
-                return (
-                  <li
-                    key={filters.tempers.indexOf(e)}
-                    value={filters.tempers.indexOf(e)}
-                    onClick={(e) => {
-                      let aux = filters.tempers;
-                      aux.splice(e.target.value, 1);
-                      setFilters({
-                        ...filters,
-                        tempers: aux,
-                      });
-                      setPage(1);
-                    }}
-                  >
-                    {e.nombre}
-                  </li>
-                );
-              })}
-            </ul>
-          ) : (
-            <h5>selecciona tempers para filtrar </h5>
+          <ul>
+            {filters.tempers.map((e) => {
+              return (
+                <li
+                  key={filters.tempers.indexOf(e)}
+                  value={filters.tempers.indexOf(e)}
+                  onClick={(e) => {
+                    let aux = filters.tempers;
+                    aux.splice(e.target.value, 1);
+                    setFilters({
+                      ...filters,
+                      tempers: aux,
+                    });
+                    setPage(1);
+                  }}
+                >
+                  {e.nombre}
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <h5>selecciona tempers para filtrar </h5>
         )}
       </div>
 
-      <div className={S.DivResults}>        
+      <div className={S.DivResults}>
         <div className={S.DivPagination}>
           <div className={S.ResultsTitle}>
             <h1> Resultados búsqueda </h1>
@@ -173,34 +175,36 @@ export default function Filters() {
                 });
                 setPage(1);
               }}
-              >
-                Limpiar filtros
+            >
+              Limpiar filtros
             </button>
           </div>
-          <div>          
-        <div>
-          <h3>Página</h3>
-          <button onClick={() => setPage(1)}>{"|<"}</button>
-          <button onClick={() => page != 1 && setPage(page - 1)}>{"<"}</button>
+          <div>
+            <div>
+              <h3>Página</h3>
+              <button onClick={() => setPage(1)}>{"|<"}</button>
+              <button onClick={() => page != 1 && setPage(page - 1)}>
+                {"<"}
+              </button>
 
-          <input
-            value={page}
-            onBlur={(e) => {
-              setPage(e.target.value);
-            }}
-            onChange={(e) => {
-              if (e.target.value > 0 && e.target.value < maxPages)
-                setPage(e.target.value);
-            }}
-          ></input>
-          <label>/{maxPages}</label>
+              <input
+                value={page}
+                onBlur={(e) => {
+                  setPage(e.target.value);
+                }}
+                onChange={(e) => {
+                  if (e.target.value > 0 && e.target.value < maxPages)
+                    setPage(e.target.value);
+                }}
+              ></input>
+              <label>/{maxPages}</label>
 
-          <button onClick={() => page !== maxPages && setPage(page + 1)}>
-            {">"}
-          </button>
-          <button onClick={() => setPage(maxPages)}>{">|"}</button>
-        </div>
-          </div>        
+              <button onClick={() => page !== maxPages && setPage(page + 1)}>
+                {">"}
+              </button>
+              <button onClick={() => setPage(maxPages)}>{">|"}</button>
+            </div>
+          </div>
         </div>
         {dogsInfo.length > 0 ? (
           <AllCards dogsArray={pages[page]} />
@@ -231,7 +235,6 @@ export default function Filters() {
         </button>
         <button onClick={() => setPage(maxPages)}>{">|"}</button>
       </div>
-
     </div>
   );
 }

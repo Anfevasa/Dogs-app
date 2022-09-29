@@ -19,7 +19,7 @@
 .CardAlikeContainer{
     margin: 2%;
     border: 5px solid #a60ce8;
-    background-color: rgba(223, 223, 223, 0.464);;
+    background-color: rgba(223, 223, 223, 0.464);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;

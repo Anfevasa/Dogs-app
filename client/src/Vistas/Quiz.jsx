@@ -3,16 +3,15 @@ import { useSelector } from "react-redux";
 import Card from "../Components/Card";
 import { dogClones } from "../Utils/Quiz";
 
-import S from "./Styles/Quiz.module.css"
+import S from "./Styles/Quiz.module.css";
 
 export default function Quiz() {
   const dogsTempers = useSelector((state) => state.tempers);
-  const allDogs = useSelector(state => state.dogsCopy)
+  const allDogs = useSelector((state) => state.dogsCopy);
 
   const [personality, setPersonality] = useState([]);
 
-  let bestDogs = dogClones(personality,allDogs)
-  
+  let bestDogs = dogClones(personality, allDogs);
 
   const handleTempers = (e) => {
     if (!personality.find((t) => t.ID === e.target.value)) {
@@ -26,8 +25,10 @@ export default function Quiz() {
   return (
     <div>
       <h1 className={S.Title}>QUIZ</h1>
+      <p>¿Qué raza de perro eres según tu personalidad?</p>
       <p>
-        Selecciona de la siguente lista aquellas características que más te representen y te presentaremos los perritos que más se parecen a ti.
+        Selecciona de la siguente lista aquellas características que más te
+        representen y te presentaremos los perritos que más se parecen a ti.
       </p>
       <div>
         <label> Tempers: </label>
@@ -51,7 +52,7 @@ export default function Quiz() {
           )}
         </select>
         {personality.length > 0 ? (
-          <div className={S.TempersDiv} >
+          <div className={S.TempersDiv}>
             <ul className={S.TempersContainer}>
               {personality.map((e) => {
                 return (
@@ -75,39 +76,29 @@ export default function Quiz() {
         )}
       </div>
       <div>
-        <p>
-            Los perros que más se adaptan a tu personalidad son
-        </p>
-        {/* <div>
-            {bestDogs?
-            <div>
-               <AllCards dogsArray={bestDogs.map((e)=>e[0])} percentages={bestDogs}/>
-            </div>:
-            <h3>No tenemos sugerencias</h3>
-            }
-        </div> */}
-        <hr/>
+        <p>Los perros que más se adaptan a tu personalidad son</p>
+        <hr />
         <div className={S.CardAlikeContainer}>
-            {bestDogs? bestDogs.map((dogAlike)=>{
-              return(
+          {bestDogs ? (
+            bestDogs.map((dogAlike) => {
+              return (
                 <div className={S.CardAlike}>
-                  <Card props={dogAlike[0]}/>
+                  <Card props={dogAlike[0]} />
                   <div className={S.CardAlikeDetail}>
                     <h3> Te pareces a este</h3>
                     <h3> perrito en un: </h3>
-                    <h1 className={S.Percentages}>  {dogAlike[1]}% </h1>
+                    <h1 className={S.Percentages}> {dogAlike[1]}% </h1>
                     <hr></hr>
-                    <h3> Este perrito se  </h3>
+                    <h3> Este perrito se </h3>
                     <h3> parece a ti en un:</h3>
-                    <h1 className={S.Percentages}>  {dogAlike[2]}% </h1>
+                    <h1 className={S.Percentages}> {dogAlike[2]}% </h1>
                   </div>
                 </div>
-                
-              )
+              );
             })
-            :
+          ) : (
             <h3>No tenemos sugerencias</h3>
-            }
+          )}
         </div>
       </div>
     </div>
