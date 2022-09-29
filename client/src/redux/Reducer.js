@@ -1,5 +1,6 @@
 import {
   ADD_FAVORITES,
+  CLEAN_DETAILS,
   GET_ALL,
   GET_BY_ID,
   GET_TEMPERS,
@@ -38,6 +39,9 @@ export default function rootReducer(state = initialState, { type, payload }) {
 
     case SAVE_FILTERS:
       return { ...state, filters: payload };
+
+    case CLEAN_DETAILS:
+      return { ...state, detail: []}
 
     case ADD_FAVORITES:
       return { ...state, favorites: [...state.favorites, payload] };

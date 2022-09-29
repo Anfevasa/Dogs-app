@@ -124,7 +124,7 @@ const getDogByID = async (req, res) => {
           };
         }
         res.json(dog);
-      } else res.status(400).json({ error: "invalid ID" });
+      } else res.status(404).json({ error: "ERROR 404 : Dog not found" });
     } catch (e) {
       res.status(400).json({ API_err: e.message });
     }
